@@ -7,7 +7,7 @@ clean:
 	rm -f $(FILES)
 
 startup.py: startup.xls
-	python $@
+	@python $@
 
 startup.xls: startup.zip
 	unzip $<
