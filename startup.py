@@ -12,24 +12,22 @@ REVENUE_CLASS = 'classe di valore della produzione ultimo anno (1)'
 EMPLOYEE_CLASS = 'classe di addetti ultimo anno (2)'
 CLASSES = ['A', 'B', 'C', 'D', 'E']
 
+def print_report(sheet, column, values=None):
+	data = [el for el in sheet[column]]
+	if values:
+		data = filter(lambda el: el in values, data)
+
+	for k, v in Counter(data).most_common():
+		print "%4d\t%s" % (v, k)
+	print
+
 def main():
     xls = pd.ExcelFile(XLS_NAME)
     sheet = xls.parse(SHEET_NAME)
 
-    data = [el for el in sheet[BUSINESS_TYPE]]
-    for k,v in Counter(data).most_common():
-        print "%4d\t%s" % (v, k)
-    print
-
-    data = [el for el in sheet[REVENUE_CLASS] if el in CLASSES]
-    for k,v in Counter(data).most_common():
-        print "%4d\t%s" % (v, k)
-    print
-
-    data = [el for el in sheet[EMPLOYEE_CLASS] if el in CLASSES]
-    for k,v in Counter(data).most_common():
-        print "%4d\t%s" % (v, k)
-
+    print_report(sheet, BUSINESS_TYPE)
+    print_report(sheet, REVENUE_CLASS, CLASSES)
+    print_report(sheet, EMPLOYEE_CLASS, CLASSES)
 
 if __name__ == '__main__':
     main()
