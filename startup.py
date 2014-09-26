@@ -41,5 +41,27 @@ def main():
         print "%4d\t%s" % (v, k)
     print
 
+    min_total = 0
+    max_total = 0
+    good = [el for el in sheet[REVENUE_CLASS] if el in CLASSES]
+    for el in good:
+        if el == 'A':
+            max_total += 110
+        elif el == 'B':
+            min_total += 110
+            max_total += 500
+        elif el == 'C':
+            min_total += 500
+            max_total += 1000
+        elif el == 'D':
+            min_total += 1000
+            max_total += 2000
+        elif el == 'E':
+            min_total += 2000
+            max_total += 5000
+    print "Min total: %d000" % min_total
+    print "Max total: %d000" % max_total
+    print
+
 if __name__ == '__main__':
     main()
