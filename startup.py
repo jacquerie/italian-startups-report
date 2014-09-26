@@ -29,5 +29,10 @@ def main():
     print_report(sheet, REVENUE_CLASS, CLASSES)
     print_report(sheet, EMPLOYEE_CLASS, CLASSES)
 
+    data = sheet.as_matrix()
+    good = filter(lambda el: el[-5] in CLASSES and el[-4] in CLASSES and el[-5] < el[-4], data)
+    for el in map(lambda el: el[0], good):
+        print el
+
 if __name__ == '__main__':
     main()
