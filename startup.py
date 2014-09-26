@@ -30,9 +30,16 @@ def main():
     print_report(sheet, EMPLOYEE_CLASS, CLASSES)
 
     data = sheet.as_matrix()
+
     good = filter(lambda el: el[-5] in CLASSES and el[-4] in CLASSES and el[-5] < el[-4], data)
     for el in map(lambda el: el[0], good):
         print el
+    print
+
+    good = filter(lambda el: el[-5] in CLASSES and el[-4] in CLASSES, data)
+    for k, v in Counter(map(lambda el: "%c%c" % (el[-5], el[-4]), good)).most_common():
+        print "%4d\t%s" % (v, k)
+    print
 
 if __name__ == '__main__':
     main()
