@@ -13,13 +13,13 @@ EMPLOYEE_CLASS = 'classe di addetti ultimo anno (2)'
 CLASSES = ['A', 'B', 'C', 'D', 'E']
 
 def print_report(sheet, column, values=None):
-	data = [el for el in sheet[column]]
-	if values:
-		data = filter(lambda el: el in values, data)
+    data = [el for el in sheet[column]]
+    if values:
+        data = filter(lambda el: el in values, data)
 
-	for k, v in Counter(data).most_common():
-		print "%4d\t%s" % (v, k)
-	print
+    for k, v in Counter(data).most_common():
+        print "%4d\t%s" % (v, k)
+    print
 
 def main():
     xls = pd.ExcelFile(XLS_NAME)
