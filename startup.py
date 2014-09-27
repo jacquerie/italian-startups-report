@@ -12,22 +12,16 @@ REVENUE_CLASS = 'classe di valore della produzione ultimo anno (1)'
 EMPLOYEE_CLASS = 'classe di addetti ultimo anno (2)'
 CLASSES = ['A', 'B', 'C', 'D', 'E']
 
-def print_report(sheet, column, values=None):
-    data = [el for el in sheet[column]]
-    if values:
-        data = filter(lambda el: el in values, data)
-
-    for k, v in Counter(data).most_common():
-        print "%4d\t%s" % (v, k)
-    print
-
 def main():
     xls = pd.ExcelFile(XLS_NAME)
     sheet = xls.parse(SHEET_NAME)
 
-    print_report(sheet, BUSINESS_TYPE)
-    print_report(sheet, REVENUE_CLASS, CLASSES)
-    print_report(sheet, EMPLOYEE_CLASS, CLASSES)
+    print sheet[BUSINESS_TYPE].value_counts()
+    print
+    print sheet[sheet[REVENUE_CLASS].isin(CLASSES)][REVENUE_CLASS].value_counts()
+    print
+    print sheet[sheet[EMPLOYEE_CLASS].isin(CLASSES)][EMPLOYEE_CLASS].value_counts()
+    print
 
     data = sheet.as_matrix()
 
