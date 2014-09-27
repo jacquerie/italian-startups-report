@@ -5,7 +5,7 @@ from collections import Counter
 import pandas as pd
 
 XLS_NAME = 'startup.xls'
-SHEET_NAME = 'STARTUP_15092014'
+SHEET_NAME = 'STARTUP_22092014'
 
 BUSINESS_TYPE = 'nat.giuridica'
 REVENUE_CLASS = 'classe di valore della produzione ultimo anno (1)'
