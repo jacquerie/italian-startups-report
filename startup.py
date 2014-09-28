@@ -7,6 +7,7 @@ XLS_NAME = 'startup.xls'
 SHEET_NAME = 'STARTUP_22092014'
 
 BUSINESS_NAME = 'denominazione'
+BUSINESS_PROV = 'pv'
 BUSINESS_TYPE = 'nat.giuridica'
 REVENUE_CLASS = 'classe di valore della produzione ultimo anno (1)'
 EMPLOYEE_CLASS = 'classe di addetti ultimo anno (2)'
@@ -44,6 +45,10 @@ POPULATION = {
 def main():
     xls = pd.ExcelFile(XLS_NAME)
     sheet = xls.parse(SHEET_NAME)
+
+    # Business province counts.
+    print sheet[BUSINESS_PROV].value_counts().head(10)
+    print
 
     # Business type counts.
     print sheet[BUSINESS_TYPE].value_counts()
