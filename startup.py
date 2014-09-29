@@ -104,12 +104,18 @@ def main():
     lower, upper = estimate(sheet, REVENUE_CLASS, CLASSES, REVENUE_LIMITS)
     print "Minimum total revenue: €%d" % lower
     print "Maximum total revenue: €%d" % upper
+    print "N: %d" % sheet[
+        sheet[REVENUE_CLASS].isin(CLASSES)
+    ][REVENUE_CLASS].count()
     print
 
     # Estimating total employees.
     lower, upper = estimate(sheet, EMPLOYEE_CLASS, CLASSES, EMPLOYEE_LIMITS)
     print "Minimum total employees: %d" % lower
     print "Maximum total employees: %d" % upper
+    print "N: %d" % sheet[
+        sheet[EMPLOYEE_CLASS].isin(CLASSES)
+    ][EMPLOYEE_CLASS].count()
     print
 
     # Classes mixing revenue class and employee class, and their counts.
