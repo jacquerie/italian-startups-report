@@ -13,6 +13,20 @@ REVENUE_CLASS = 'classe di valore della produzione ultimo anno (1)'
 EMPLOYEE_CLASS = 'classe di addetti ultimo anno (2)'
 
 CLASSES = ['A', 'B', 'C', 'D', 'E']
+REVENUE_LIMITS = {
+    'A': {'lower': 0, 'upper': 100000},
+    'B': {'lower': 100000, 'upper': 500000},
+    'C': {'lower': 500000, 'upper': 1000000},
+    'D': {'lower': 1000000, 'upper': 2000000},
+    'E': {'lower': 2000000, 'upper': 5000000}
+}
+EMPLOYEE_LIMITS = {
+    'A': {'lower': 0, 'upper': 4},
+    'B': {'lower': 5, 'upper': 9},
+    'C': {'lower': 10, 'upper': 19},
+    'D': {'lower': 20, 'upper': 49},
+    'E': {'lower': 50, 'upper': 50}
+}
 
 # From https://it.wikipedia.org/wiki/Province_d%27Italia.
 # FC -> FO and PU -> PS to mimic corresponding errors in the xls.
@@ -42,6 +56,21 @@ POPULATION = {
 }
 
 
+def estimate(sheet, column, values, limits):
+    lower = 0
+    upper = 0
+    s = sheet[
+        sheet[column].isin(values)
+    ][column]
+    for el in s:
+        if el in limits:
+            lower += limits[el]['lower']
+            upper += limits[el]['upper']
+        else:
+            next
+    return [lower, upper]
+
+
 def main():
     xls = pd.ExcelFile(XLS_NAME)
     sheet = xls.parse(SHEET_NAME)
@@ -66,59 +95,15 @@ def main():
     print
 
     # Estimating total revenue.
-    # XXX(jacquerie): This needs a refactoring.
-    lower = 0
-    upper = 0
-    s = sheet[
-        sheet[REVENUE_CLASS].isin(CLASSES)
-    ][REVENUE_CLASS]
-    for el in s:
-        if el == 'A':
-            lower += 0
-            upper += 100000
-        elif el == 'B':
-            lower += 100000
-            upper += 500000
-        elif el == 'C':
-            lower += 500000
-            upper += 1000000
-        elif el == 'D':
-            lower += 1000000
-            upper += 2000000
-        elif el == 'E':
-            lower += 2000000
-            upper += 5000000
-        else:
-            next
-    print "Minimum total revenue: €%d\nMaximum total revenue: €%d" % (lower, upper)
+    lower, upper = estimate(sheet, REVENUE_CLASS, CLASSES, REVENUE_LIMITS)
+    print "Minimum total revenue: €%d" % lower
+    print "Maximum total revenue: €%d" % upper
     print
 
-    # Employee classes counts.
-    # XXX(jacquerie): This needs a refactoring.
-    lower = 0
-    upper = 0
-    s = sheet[
-        sheet[EMPLOYEE_CLASS].isin(CLASSES)
-    ][EMPLOYEE_CLASS]
-    for el in s:
-        if el == 'A':
-            lower += 0
-            upper += 4
-        elif el == 'B':
-            lower += 5
-            upper += 9
-        elif el == 'C':
-            lower += 10
-            upper += 19
-        elif el == 'D':
-            lower += 20
-            upper += 49
-        elif el == 'E':
-            lower += 50
-            upper += 50
-        else:
-            next
-    print "Minimum total employees: %d\nMaximum total employees: %d" % (lower, upper)
+    # Estimating total employees.
+    lower, upper = estimate(sheet, EMPLOYEE_CLASS, CLASSES, EMPLOYEE_LIMITS)
+    print "Minimum total employees: %d" % lower
+    print "Maximum total employees: %d" % upper
     print
 
     # Classes mixing revenue class and employee class, and their counts.
