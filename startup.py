@@ -65,16 +65,58 @@ def main():
     print sheet[BUSINESS_TYPE].value_counts()
     print
 
-    # Revenue classes counts.
-    print sheet[
+    # Estimating total revenue.
+    lower = 0
+    upper = 0
+    s = sheet[
         sheet[REVENUE_CLASS].isin(CLASSES)
-    ][REVENUE_CLASS].value_counts()
+    ][REVENUE_CLASS]
+    for el in s:
+        if el == 'A':
+            lower += 0
+            upper += 100000
+        elif el == 'B':
+            lower += 100000
+            upper += 500000
+        elif el == 'C':
+            lower += 500000
+            upper += 1000000
+        elif el == 'D':
+            lower += 1000000
+            upper += 2000000
+        elif el == 'E':
+            lower += 2000000
+            upper += 5000000
+        else:
+            next
+    print "Minimum total revenue: %d €\nMaximum total revenue: %d €" % (lower, upper)
     print
 
     # Employee classes counts.
-    print sheet[
+    lower = 0
+    upper = 0
+    s = sheet[
         sheet[EMPLOYEE_CLASS].isin(CLASSES)
-    ][EMPLOYEE_CLASS].value_counts()
+    ][EMPLOYEE_CLASS]
+    for el in s:
+        if el == 'A':
+            lower += 0
+            upper += 4
+        elif el == 'B':
+            lower += 5
+            upper += 9
+        elif el == 'C':
+            lower += 10
+            upper += 19
+        elif el == 'D':
+            lower += 20
+            upper += 49
+        elif el == 'E':
+            lower += 50
+            upper += 50
+        else:
+            next
+    print "Minimum total employees: %d\nMaximum total employees: %d" % (lower, upper)
     print
 
     # Classes mixing revenue class and employee class, and their counts.
