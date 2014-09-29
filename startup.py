@@ -4,7 +4,7 @@
 import pandas as pd
 
 XLS_NAME = 'startup.xls'
-SHEET_NAME = 'STARTUP_22092014'
+SHEET_NAME = 'STARTUP_29092014'
 
 BUSINESS_NAME = 'denominazione'
 BUSINESS_PROV = 'pv'
