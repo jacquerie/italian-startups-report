@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
+import math
 import pandas as pd
 
 XLS_NAME = 'startup.xls'
@@ -12,7 +13,7 @@ BUSINESS_PROV = 'pv'
 BUSINESS_TYPE = 'nat.giuridica'
 REVENUE_CLASS = 'classe di valore della produzione ultimo anno (1)'
 EMPLOYEE_CLASS = 'classe di addetti ultimo anno (2)'
-BEGIN_DATE = 'data inizio dell\'esercizio effettivo dell\'attività'
+BEGIN_DATE = u'data inizio dell\'esercizio effettivo dell\'attività'
 
 CLASSES = ['A', 'B', 'C', 'D', 'E']
 REVENUE_LIMITS = {
@@ -69,7 +70,7 @@ def estimate(sheet, column, values, limits):
             lower += limits[el]['lower']
             upper += limits[el]['upper']
         else:
-            next
+            continue
     return [lower, upper]
 
 
@@ -142,6 +143,22 @@ def main():
         ].T.apply(
             lambda el: ord(el[REVENUE_CLASS]) > ord(el[EMPLOYEE_CLASS]) + 1).T
         ], BUSINESS_NAME]
+    print
+
+    # Estimate month-by-month growth.
+    # XXX(jacquerie): This needs a refactoring
+    d = {}
+    s = pd.to_datetime(sheet[BEGIN_DATE], dayfirst=True)
+    for el in s.index:
+        if sheet.at[el, REVENUE_CLASS] in CLASSES and not pd.isnull(s[el]):
+            n = month_diff(pd.to_datetime(TODAY), pd.to_datetime(s[el]))
+            if (n < 6):
+                continue
+            b = max(REVENUE_LIMITS[sheet.at[el, REVENUE_CLASS]]['lower'], 1)
+            d[el] = math.log(b) / n
+    result = sorted(d.iteritems(), key=lambda x: -x[1])
+    for el in map(lambda x: x[0], result[:20]):
+        print sheet.at[el, BUSINESS_NAME]
     print
 
 
