@@ -50,6 +50,16 @@ def main():
     print sheet[BUSINESS_PROV].value_counts().head(10)
     print
 
+    # Business province weighted counts.
+    d = {}
+    s = sheet.groupby([BUSINESS_PROV]).size()
+    for el in s.index:
+        d[el] = s[el] / float(POPULATION[el])
+    result = sorted(d.iteritems(), key=lambda x: -x[1])
+    for el in map(lambda x: x[0], result[:10]):
+        print "%s%7d" % (el, s[el])
+    print
+
     # Business type counts.
     print sheet[BUSINESS_TYPE].value_counts()
     print
