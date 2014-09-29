@@ -5,12 +5,14 @@ import pandas as pd
 
 XLS_NAME = 'startup.xls'
 SHEET_NAME = 'STARTUP_29092014'
+TODAY = '2014-09-29'
 
 BUSINESS_NAME = 'denominazione'
 BUSINESS_PROV = 'pv'
 BUSINESS_TYPE = 'nat.giuridica'
 REVENUE_CLASS = 'classe di valore della produzione ultimo anno (1)'
 EMPLOYEE_CLASS = 'classe di addetti ultimo anno (2)'
+BEGIN_DATE = 'data inizio dell\'esercizio effettivo dell\'attività'
 
 CLASSES = ['A', 'B', 'C', 'D', 'E']
 REVENUE_LIMITS = {
@@ -69,6 +71,10 @@ def estimate(sheet, column, values, limits):
         else:
             next
     return [lower, upper]
+
+
+def month_diff(d1, d2):
+    return 12 * (d1.year - d2.year) + d1.month - d2.month
 
 
 def main():
