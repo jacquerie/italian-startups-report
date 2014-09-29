@@ -51,6 +51,7 @@ def main():
     print
 
     # Business province weighted counts.
+    # XXX(jacquerie): This method badly needs refactoring.
     d = {}
     s = sheet.groupby([BUSINESS_PROV]).size()
     for el in s.index:
