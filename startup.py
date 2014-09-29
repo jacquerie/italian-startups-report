@@ -51,7 +51,7 @@ def main():
     print
 
     # Business province weighted counts.
-    # XXX(jacquerie): This method badly needs refactoring.
+    # XXX(jacquerie): This needs a refactoring.
     d = {}
     s = sheet.groupby([BUSINESS_PROV]).size()
     for el in s.index:
@@ -66,6 +66,7 @@ def main():
     print
 
     # Estimating total revenue.
+    # XXX(jacquerie): This needs a refactoring.
     lower = 0
     upper = 0
     s = sheet[
@@ -89,10 +90,11 @@ def main():
             upper += 5000000
         else:
             next
-    print "Minimum total revenue: %d €\nMaximum total revenue: %d €" % (lower, upper)
+    print "Minimum total revenue: €%d\nMaximum total revenue: €%d" % (lower, upper)
     print
 
     # Employee classes counts.
+    # XXX(jacquerie): This needs a refactoring.
     lower = 0
     upper = 0
     s = sheet[
