@@ -1,1 +1,21 @@
 # italian-startups-report #
+
+This project aims to free and interpret the data contained in PDF or XLS files
+on [http://startup.registroimprese.it/](http://startup.registroimprese.it/).
+
+## Install ##
+
+1. Clone this repository: `git clone https://github.com/jacquerie/italian-startup-report.git`
+2. Install the dependencies: `cd italian-startup-report && pip install -r requirements.txt`
+
+## Usage ##
+
+Just run `make` in the project folder.
+
+## Author ##
+
+Jacopo Notarstefano ([@Jaconotar](https://twitter.com/Jaconotar))
+
+## License ##
+
+MIT
