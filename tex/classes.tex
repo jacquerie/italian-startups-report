@@ -1,0 +1,63 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+
+\begin{document}
+  \begin{tikzpicture}
+    \node (A-revenue) at (1.5,6.5) [] {\(A\)};
+    \node (B-revenue) at (2.5,6.5) [] {\(B\)};
+    \node (C-revenue) at (3.5,6.5) [] {\(C\)};
+    \node (D-revenue) at (4.5,6.5) [] {\(D\)};
+    \node (E-revenue) at (5.5,6.5) [] {\(E\)};
+
+    \node (A-employee) at (0.5,5.5) [] {\(A\)};
+    \node (B-employee) at (0.5,4.5) [] {\(B\)};
+    \node (C-employee) at (0.5,3.5) [] {\(C\)};
+    \node (D-employee) at (0.5,2.5) [] {\(D\)};
+    \node (E-employee) at (0.5,1.5) [] {\(E\)};
+
+    \node (AA-data) at (1.5,5.5) [] {\(302\)};
+    \node (AB-data) at (2.5,5.5) [] {\(184\)};
+    \node (AC-data) at (3.5,5.5) [] {\(12\)};
+    \node (AD-data) at (4.5,5.5) [] {\(1\)};
+    \node (AE-data) at (5.5,5.5) [] {};
+
+    \node (BA-data) at (1.5,4.5) [] {\(12\)};
+    \node (BB-data) at (2.5,4.5) [] {\(41\)};
+    \node (BC-data) at (3.5,4.5) [] {\(15\)};
+    \node (BD-data) at (4.5,4.5) [] {\(6\)};
+    \node (BE-data) at (5.5,4.5) [] {\(2\)};
+
+    \node (CA-data) at (1.5,3.5) [] {};
+    \node (CB-data) at (2.5,3.5) [] {\(8\)};
+    \node (CC-data) at (3.5,3.5) [] {\(9\)};
+    \node (CD-data) at (4.5,3.5) [] {\(11\)};
+    \node (CE-data) at (5.5,3.5) [] {\(4\)};
+
+    \node (DA-data) at (1.5,2.5) [] {};
+    \node (DB-data) at (2.5,2.5) [] {\(1\)};
+    \node (DC-data) at (3.5,2.5) [] {};
+    \node (DD-data) at (4.5,2.5) [] {\(1\)};
+    \node (DE-data) at (5.5,2.5) [] {\(4\)};
+
+    \node (EA-data) at (1.5,1.5) [] {};
+    \node (EB-data) at (2.5,1.5) [] {};
+    \node (EC-data) at (3.5,1.5) [] {};
+    \node (ED-data) at (4.5,1.5) [] {};
+    \node (EE-data) at (5.5,1.5) [] {};
+
+    \draw (1,1) -- (6,1);
+    \draw (1,2) -- (6,2);
+    \draw (1,3) -- (6,3);
+    \draw (1,4) -- (6,4);
+    \draw (1,5) -- (6,5);
+    \draw (1,6) -- (6,6);
+
+    \draw (1,1) -- (1,6);
+    \draw (2,1) -- (2,6);
+    \draw (3,1) -- (3,6);
+    \draw (4,1) -- (4,6);
+    \draw (5,1) -- (5,6);
+    \draw (6,1) -- (6,6);
+  \end{tikzpicture}
+\end{document}
