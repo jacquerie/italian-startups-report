@@ -82,12 +82,16 @@ def main():
     xls = pd.ExcelFile(XLS_NAME)
     sheet = xls.parse(SHEET_NAME)
 
-    # Business province counts.
+    print
+    print 'First ten provinces ordered by number of startups'
+    print '-------------------------------------------------'
     print sheet[BUSINESS_PROV].value_counts().head(10)
     print
 
-    # Business province weighted counts.
     # XXX(jacquerie): This needs a refactoring.
+    print
+    print 'First ten provinces ordered by numer of startups, weighted by population'
+    print '------------------------------------------------------------------------'
     d = {}
     s = sheet.groupby([BUSINESS_PROV]).size()
     for el in s.index:
@@ -97,11 +101,15 @@ def main():
         print "%s%7d" % (el, s[el])
     print
 
-    # Business type counts.
+    print
+    print 'Business types used by startups with counts'
+    print '-------------------------------------------'
     print sheet[BUSINESS_TYPE].value_counts()
     print
 
-    # Estimating total revenue.
+    print
+    print 'Lower and upper estimates of all revenue produced by startups'
+    print '-------------------------------------------------------------'
     lower, upper = estimate(sheet, REVENUE_CLASS, CLASSES, REVENUE_LIMITS)
     print "Minimum total revenue: €%d" % lower
     print "Maximum total revenue: €%d" % upper
@@ -110,7 +118,9 @@ def main():
     ][REVENUE_CLASS].count()
     print
 
-    # Estimating total employees.
+    print
+    print 'Lower and upper estimates of the total number of employees in startups'
+    print '----------------------------------------------------------------------'
     lower, upper = estimate(sheet, EMPLOYEE_CLASS, CLASSES, EMPLOYEE_LIMITS)
     print "Minimum total employees: %d" % lower
     print "Maximum total employees: %d" % upper
@@ -119,7 +129,9 @@ def main():
     ][EMPLOYEE_CLASS].count()
     print
 
-    # Classes mixing revenue class and employee class, and their counts.
+    print
+    print 'Classes combining revenue and employee classes and their counts'
+    print '---------------------------------------------------------------'
     print sheet[
         (sheet[REVENUE_CLASS].isin(CLASSES)) &
         (sheet[EMPLOYEE_CLASS].isin(CLASSES))
@@ -128,14 +140,18 @@ def main():
     ).value_counts()
     print
 
-    # Startups whose revenue class is smaller than their employee class.
+    print
+    print 'Startups whose revenue class is smaller than their employee class'
+    print '-----------------------------------------------------------------'
     print sheet.loc[
         (sheet[REVENUE_CLASS].isin(CLASSES)) &
         (sheet[EMPLOYEE_CLASS].isin(CLASSES)) &
         (sheet[REVENUE_CLASS] < sheet[EMPLOYEE_CLASS]), BUSINESS_NAME]
     print
 
-    # Startups whose revenue class is much bigger than their employee class.
+    print
+    print 'Startups whose revenue class is much bigger than their employee class'
+    print '---------------------------------------------------------------------'
     print sheet.loc[
         sheet.index[sheet[
             (sheet[REVENUE_CLASS].isin(CLASSES)) &
@@ -145,8 +161,10 @@ def main():
         ], BUSINESS_NAME]
     print
 
-    # Estimate month-by-month growth.
     # XXX(jacquerie): This needs a refactoring.
+    print
+    print 'First ten startups by month-by-month growth estimate'
+    print '----------------------------------------------------'
     d = {}
     s = pd.to_datetime(sheet[BEGIN_DATE], dayfirst=True)
     for el in s.index:
