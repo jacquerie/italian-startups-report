@@ -75,7 +75,7 @@ def estimate(sheet, column, values, limits):
 
 
 def month_diff(d1, d2):
-    return 12 * (d1.year - d2.year) + d1.month - d2.month
+    return (365 * (d1.year - d2.year) + (d1.dayofyear - d2.dayofyear)) / 30
 
 
 def main():
@@ -146,7 +146,7 @@ def main():
     print
 
     # Estimate month-by-month growth.
-    # XXX(jacquerie): This needs a refactoring
+    # XXX(jacquerie): This needs a refactoring.
     d = {}
     s = pd.to_datetime(sheet[BEGIN_DATE], dayfirst=True)
     for el in s.index:
@@ -154,8 +154,8 @@ def main():
             n = month_diff(pd.to_datetime(TODAY), pd.to_datetime(s[el]))
             if (n < 6):
                 continue
-            b = max(REVENUE_LIMITS[sheet.at[el, REVENUE_CLASS]]['lower'], 1)
-            d[el] = math.log(b) / n
+            b = max(REVENUE_LIMITS[sheet.at[el, REVENUE_CLASS]]['lower'], 10000)
+            d[el] = (math.log(b) - math.log(10000)) / n
     result = sorted(d.iteritems(), key=lambda x: -x[1])
     for el in map(lambda x: x[0], result[:20]):
         print sheet.at[el, BUSINESS_NAME]
