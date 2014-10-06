@@ -5,17 +5,17 @@ import math
 import pandas as pd
 
 XLS_NAME = 'startup.xls'
-SHEET_NAME = 'STARTUP_29092014'
-TODAY = '2014-09-29'
+SHEET_NAME = 'STARTUP_06102014'
+TODAY = '2014-10-06'
 
 BUSINESS_NAME = 'denominazione'
 BUSINESS_PROV = 'pv'
 BUSINESS_TYPE = 'nat.giuridica'
-REVENUE_CLASS = 'classe di valore della produzione ultimo anno (1)'
+REVENUE_CLASS = 'classe di produzione ultimo anno (1)'
 EMPLOYEE_CLASS = 'classe di addetti ultimo anno (2)'
 BEGIN_DATE = u'data inizio dell\'esercizio effettivo dell\'attività'
 
-CLASSES = ['A', 'B', 'C', 'D', 'E']
+REVENUE_CLASSES = ['A', 'B', 'C', 'D', 'E']
 REVENUE_LIMITS = {
     'A': {'lower': 0, 'upper': 100000},
     'B': {'lower': 100000, 'upper': 500000},
@@ -23,12 +23,27 @@ REVENUE_LIMITS = {
     'D': {'lower': 1000000, 'upper': 2000000},
     'E': {'lower': 2000000, 'upper': 5000000}
 }
+
+EMPLOYEE_CLASSES = ['A', 'B', 'C', 'D', 'E']
 EMPLOYEE_LIMITS = {
     'A': {'lower': 0, 'upper': 4},
     'B': {'lower': 5, 'upper': 9},
     'C': {'lower': 10, 'upper': 19},
     'D': {'lower': 20, 'upper': 49},
     'E': {'lower': 50, 'upper': 50}
+}
+
+CAPITAL_CLASSES = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+CAPITAL_LIMITS = {
+    1: {'lower': 1, 'upper': 1},
+    2: {'lower': 1, 'upper': 5000},
+    3: {'lower': 5000, 'upper': 10000},
+    4: {'lower': 10000, 'upper': 50000},
+    5: {'lower': 50000, 'upper': 100000},
+    6: {'lower': 100000, 'upper': 250000},
+    7: {'lower': 250000, 'upper': 500000},
+    8: {'lower': 500000, 'upper': 1000000},
+    9: {'lower': 1000000, 'upper': 1000000}
 }
 
 # From https://it.wikipedia.org/wiki/Province_d%27Italia.
@@ -110,22 +125,22 @@ def main():
     print
     print 'Lower and upper estimates of all revenue produced by startups'
     print '-------------------------------------------------------------'
-    lower, upper = estimate(sheet, REVENUE_CLASS, CLASSES, REVENUE_LIMITS)
+    lower, upper = estimate(sheet, REVENUE_CLASS, REVENUE_CLASSES, REVENUE_LIMITS)
     print "Minimum total revenue: €%d" % lower
     print "Maximum total revenue: €%d" % upper
     print "N: %d" % sheet[
-        sheet[REVENUE_CLASS].isin(CLASSES)
+        sheet[REVENUE_CLASS].isin(REVENUE_CLASSES)
     ][REVENUE_CLASS].count()
     print
 
     print
     print 'Lower and upper estimates of the total number of employees in startups'
     print '----------------------------------------------------------------------'
-    lower, upper = estimate(sheet, EMPLOYEE_CLASS, CLASSES, EMPLOYEE_LIMITS)
+    lower, upper = estimate(sheet, EMPLOYEE_CLASS, EMPLOYEE_CLASSES, EMPLOYEE_LIMITS)
     print "Minimum total employees: %d" % lower
     print "Maximum total employees: %d" % upper
     print "N: %d" % sheet[
-        sheet[EMPLOYEE_CLASS].isin(CLASSES)
+        sheet[EMPLOYEE_CLASS].isin(EMPLOYEE_CLASSES)
     ][EMPLOYEE_CLASS].count()
     print
 
@@ -133,8 +148,8 @@ def main():
     print 'Classes combining revenue and employee classes and their counts'
     print '---------------------------------------------------------------'
     print sheet[
-        (sheet[REVENUE_CLASS].isin(CLASSES)) &
-        (sheet[EMPLOYEE_CLASS].isin(CLASSES))
+        (sheet[REVENUE_CLASS].isin(REVENUE_CLASSES)) &
+        (sheet[EMPLOYEE_CLASS].isin(EMPLOYEE_CLASSES))
     ].T.apply(
         lambda el: el[REVENUE_CLASS] + el[EMPLOYEE_CLASS]
     ).value_counts()
@@ -144,8 +159,8 @@ def main():
     print 'Startups whose revenue class is smaller than their employee class'
     print '-----------------------------------------------------------------'
     print sheet.loc[
-        (sheet[REVENUE_CLASS].isin(CLASSES)) &
-        (sheet[EMPLOYEE_CLASS].isin(CLASSES)) &
+        (sheet[REVENUE_CLASS].isin(REVENUE_CLASSES)) &
+        (sheet[EMPLOYEE_CLASS].isin(EMPLOYEE_CLASSES)) &
         (sheet[REVENUE_CLASS] < sheet[EMPLOYEE_CLASS]), BUSINESS_NAME]
     print
 
@@ -154,8 +169,8 @@ def main():
     print '---------------------------------------------------------------------'
     print sheet.loc[
         sheet.index[sheet[
-            (sheet[REVENUE_CLASS].isin(CLASSES)) &
-            (sheet[EMPLOYEE_CLASS].isin(CLASSES))
+            (sheet[REVENUE_CLASS].isin(REVENUE_CLASSES)) &
+            (sheet[EMPLOYEE_CLASS].isin(EMPLOYEE_CLASSES))
         ].T.apply(
             lambda el: ord(el[REVENUE_CLASS]) > ord(el[EMPLOYEE_CLASS]) + 1).T
         ], BUSINESS_NAME]
@@ -168,7 +183,7 @@ def main():
     d = {}
     s = pd.to_datetime(sheet[BEGIN_DATE], dayfirst=True)
     for el in s.index:
-        if sheet.at[el, REVENUE_CLASS] in CLASSES and not pd.isnull(s[el]):
+        if sheet.at[el, REVENUE_CLASS] in REVENUE_CLASSES and not pd.isnull(s[el]):
             n = month_diff(pd.to_datetime(TODAY), pd.to_datetime(s[el]))
             if (n < 6):
                 continue
