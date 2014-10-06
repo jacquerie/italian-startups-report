@@ -13,6 +13,7 @@ BUSINESS_PROV = 'pv'
 BUSINESS_TYPE = 'nat.giuridica'
 REVENUE_CLASS = 'classe di produzione ultimo anno (1)'
 EMPLOYEE_CLASS = 'classe di addetti ultimo anno (2)'
+CAPITAL_CLASS = 'classe di capitale (4)'
 BEGIN_DATE = u'data inizio dell\'esercizio effettivo dell\'attività'
 
 REVENUE_CLASSES = ['A', 'B', 'C', 'D', 'E']
@@ -145,6 +146,17 @@ def main():
     print
 
     print
+    print 'Lower and upper estimates of the total capital of startups'
+    print '----------------------------------------------------------------------'
+    lower, upper = estimate(sheet, CAPITAL_CLASS, CAPITAL_CLASSES, CAPITAL_LIMITS)
+    print "Minimum total capital: €%d" % lower
+    print "Maximum total capital: €%d" % upper
+    print "N: %d" % sheet[
+        sheet[CAPITAL_CLASS].isin(CAPITAL_CLASSES)
+    ][CAPITAL_CLASS].count()
+    print
+
+    print
     print 'Classes combining revenue and employee classes and their counts'
     print '---------------------------------------------------------------'
     print sheet[
@@ -174,6 +186,28 @@ def main():
         ].T.apply(
             lambda el: ord(el[REVENUE_CLASS]) > ord(el[EMPLOYEE_CLASS]) + 1).T
         ], BUSINESS_NAME]
+    print
+
+    print
+    print 'Classes combining revenue class and capital class'
+    print '-------------------------------------------------'
+    print sheet[
+        (sheet[REVENUE_CLASS].isin(REVENUE_CLASSES)) &
+        (sheet[CAPITAL_CLASS].isin(CAPITAL_CLASSES))
+    ].T.apply(
+        lambda el: el[REVENUE_CLASS] + str(el[CAPITAL_CLASS])
+    ).value_counts()
+    print
+
+    print
+    print 'Classes combining employee class and capital class'
+    print '-------------------------------------------------'
+    print sheet[
+        (sheet[EMPLOYEE_CLASS].isin(EMPLOYEE_CLASSES)) &
+        (sheet[CAPITAL_CLASS].isin(CAPITAL_CLASSES))
+    ].T.apply(
+        lambda el: el[EMPLOYEE_CLASS] + str(el[CAPITAL_CLASS])
+    ).value_counts()
     print
 
     # XXX(jacquerie): This needs a refactoring.
