@@ -5,8 +5,8 @@ import math
 import pandas as pd
 
 XLS_NAME = 'startup.xls'
-SHEET_NAME = 'STARTUP_06102014'
-TODAY = '2014-10-06'
+SHEET_NAME = 'STARTUP_13102014'
+TODAY = '2014-10-13'
 
 BUSINESS_NAME = 'denominazione'
 BUSINESS_PROV = 'pv'
