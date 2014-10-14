@@ -147,7 +147,7 @@ def main():
 
     print
     print 'Lower and upper estimates of the total capital of startups'
-    print '----------------------------------------------------------------------'
+    print '----------------------------------------------------------'
     lower, upper = estimate(sheet, CAPITAL_CLASS, CAPITAL_CLASSES, CAPITAL_LIMITS)
     print "Minimum total capital: €%d" % lower
     print "Maximum total capital: €%d" % upper
