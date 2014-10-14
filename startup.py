@@ -180,12 +180,29 @@ def main():
     print 'Startups whose revenue class is much bigger than their employee class'
     print '---------------------------------------------------------------------'
     print sheet.loc[
-        sheet.index[sheet[
-            (sheet[REVENUE_CLASS].isin(REVENUE_CLASSES)) &
-            (sheet[EMPLOYEE_CLASS].isin(EMPLOYEE_CLASSES))
-        ].T.apply(
-            lambda el: ord(el[REVENUE_CLASS]) > ord(el[EMPLOYEE_CLASS]) + 1).T
-        ], BUSINESS_NAME]
+        (sheet[REVENUE_CLASS] == 'E') &
+        (sheet[EMPLOYEE_CLASS] == 'A'), BUSINESS_NAME]
+    print
+    print sheet.loc[
+        (sheet[REVENUE_CLASS] == 'E') &
+        (sheet[EMPLOYEE_CLASS] == 'B'), BUSINESS_NAME]
+    print
+    print sheet.loc[
+        (sheet[REVENUE_CLASS] == 'E') &
+        (sheet[EMPLOYEE_CLASS] == 'C'), BUSINESS_NAME]
+    print
+    print sheet.loc[
+        (sheet[REVENUE_CLASS] == 'D') &
+        (sheet[EMPLOYEE_CLASS] == 'A'), BUSINESS_NAME]
+    print
+    print sheet.loc[
+        (sheet[REVENUE_CLASS] == 'D') &
+        (sheet[EMPLOYEE_CLASS] == 'B'), BUSINESS_NAME]
+    print
+    print sheet.loc[
+        (sheet[REVENUE_CLASS] == 'C') &
+        (sheet[EMPLOYEE_CLASS] == 'A'), BUSINESS_NAME]
+    print
     print
 
     print
