@@ -176,6 +176,7 @@ def main():
         (sheet[REVENUE_CLASS] < sheet[EMPLOYEE_CLASS]), BUSINESS_NAME]
     print
 
+    # (XXX)jacquerie: This needs a refactoring.
     print
     print 'Startups whose revenue class is much bigger than their employee class'
     print '---------------------------------------------------------------------'
