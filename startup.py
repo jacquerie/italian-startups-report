@@ -241,7 +241,7 @@ def main():
             b = max(REVENUE_LIMITS[sheet.at[el, REVENUE_CLASS]]['lower'], 10000)
             d[el] = (math.log(b) - math.log(10000)) / n
     result = sorted(d.iteritems(), key=lambda x: -x[1])
-    for el in map(lambda x: x[0], result[:20]):
+    for el in map(lambda x: x[0], result[:10]):
         print sheet.at[el, BUSINESS_NAME]
     print
 
