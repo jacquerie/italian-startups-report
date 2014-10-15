@@ -5,6 +5,8 @@ import math
 import pandas as pd
 
 XLS_NAME = 'startup.xls'
+
+# (XXX)jacquerie: Avoid this duplication.
 SHEET_NAME = 'STARTUP_13102014'
 TODAY = '2014-10-13'
 
