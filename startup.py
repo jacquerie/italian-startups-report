@@ -246,6 +246,21 @@ def main():
         print sheet.at[el, BUSINESS_NAME]
     print
 
+    print
+    print 'Startups active for more than 48 months'
+    print '---------------------------------------'
+    d = {}
+    s = pd.to_datetime(sheet[BEGIN_DATE], dayfirst=True)
+    for el in s.index:
+        if not pd.isnull(s[el]):
+            n = month_diff(pd.to_datetime(DATE), s[el])
+            if (n > 48):
+                d[sheet.at[el, BUSINESS_NAME]] = n
+    result = sorted(d.iteritems(), key=lambda x: x[1])
+    for el in result:
+        print "%d\t%s" % (el[1], el[0])
+    print
+
 
 if __name__ == '__main__':
     main()
