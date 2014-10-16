@@ -4,11 +4,9 @@
 import math
 import pandas as pd
 
+DATE = '2014-10-13'
 XLS_NAME = 'startup.xls'
-
-# (XXX)jacquerie: Avoid this duplication.
-SHEET_NAME = 'STARTUP_13102014'
-TODAY = '2014-10-13'
+SHEET_NAME = 'STARTUP_' + ''.join(reversed(DATE.split('-')))
 
 BUSINESS_NAME = 'denominazione'
 BUSINESS_PROV = 'pv'
@@ -238,7 +236,7 @@ def main():
     s = pd.to_datetime(sheet[BEGIN_DATE], dayfirst=True)
     for el in s.index:
         if sheet.at[el, REVENUE_CLASS] in REVENUE_CLASSES and not pd.isnull(s[el]):
-            n = month_diff(pd.to_datetime(TODAY), pd.to_datetime(s[el]))
+            n = month_diff(pd.to_datetime(DATE), pd.to_datetime(s[el]))
             if (n < 6):
                 continue
             b = max(REVENUE_LIMITS[sheet.at[el, REVENUE_CLASS]]['lower'], 10000)
