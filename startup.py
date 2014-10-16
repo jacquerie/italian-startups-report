@@ -246,6 +246,7 @@ def main():
         print sheet.at[el, BUSINESS_NAME]
     print
 
+    # XXX(jacquerie): This needs a refactoring.
     print
     print 'Startups active for more than 48 months'
     print '---------------------------------------'
