@@ -225,7 +225,7 @@ def main():
     s = pd.to_datetime(sheet[BEGIN_DATE], dayfirst=True)
     for el in s.index:
         if sheet.at[el, REVENUE_CLASS] in REVENUE_CLASSES and not pd.isnull(s[el]):
-            n = month_diff(pd.to_datetime(DATE), pd.to_datetime(s[el]))
+            n = month_diff(pd.to_datetime(DATE), s[el])
             if (n < 6):
                 continue
             b = max(REVENUE_LIMITS[sheet.at[el, REVENUE_CLASS]]['lower'], 10000)
