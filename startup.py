@@ -90,6 +90,12 @@ def estimate(sheet, column, values, limits):
     return [lower, upper]
 
 
+def intersect(sheet, fst_col, fst_val, snd_col, snd_val, res_col):
+    return sheet.loc[
+        (sheet[fst_col] == fst_val) &
+        (sheet[snd_col] == snd_val), res_col]
+
+
 def month_diff(d1, d2):
     return (365 * (d1.year - d2.year) + (d1.dayofyear - d2.dayofyear)) / 30
 
@@ -176,33 +182,39 @@ def main():
         (sheet[REVENUE_CLASS] < sheet[EMPLOYEE_CLASS]), BUSINESS_NAME]
     print
 
-    # (XXX)jacquerie: This needs a refactoring.
+    # (XXX)jacquerie: Remove this duplication.
     print
     print 'Startups whose revenue class is much bigger than their employee class'
     print '---------------------------------------------------------------------'
-    print sheet.loc[
-        (sheet[REVENUE_CLASS] == 'E') &
-        (sheet[EMPLOYEE_CLASS] == 'A'), BUSINESS_NAME]
+    print intersect(sheet,
+                    REVENUE_CLASS, 'E',
+                    EMPLOYEE_CLASS, 'A',
+                    BUSINESS_NAME)
     print
-    print sheet.loc[
-        (sheet[REVENUE_CLASS] == 'E') &
-        (sheet[EMPLOYEE_CLASS] == 'B'), BUSINESS_NAME]
+    print intersect(sheet,
+                    REVENUE_CLASS, 'E',
+                    EMPLOYEE_CLASS, 'B',
+                    BUSINESS_NAME)
     print
-    print sheet.loc[
-        (sheet[REVENUE_CLASS] == 'E') &
-        (sheet[EMPLOYEE_CLASS] == 'C'), BUSINESS_NAME]
+    print intersect(sheet,
+                   REVENUE_CLASS, 'E',
+                   EMPLOYEE_CLASS, 'C',
+                   BUSINESS_NAME)
     print
-    print sheet.loc[
-        (sheet[REVENUE_CLASS] == 'D') &
-        (sheet[EMPLOYEE_CLASS] == 'A'), BUSINESS_NAME]
+    print intersect(sheet,
+                    REVENUE_CLASS, 'D',
+                    EMPLOYEE_CLASS, 'A',
+                    BUSINESS_NAME)
     print
-    print sheet.loc[
-        (sheet[REVENUE_CLASS] == 'D') &
-        (sheet[EMPLOYEE_CLASS] == 'B'), BUSINESS_NAME]
+    print intersect(sheet,
+                    REVENUE_CLASS, 'D',
+                    EMPLOYEE_CLASS, 'B',
+                    BUSINESS_NAME)
     print
-    print sheet.loc[
-        (sheet[REVENUE_CLASS] == 'C') &
-        (sheet[EMPLOYEE_CLASS] == 'A'), BUSINESS_NAME]
+    print intersect(sheet,
+                    REVENUE_CLASS, 'C',
+                    EMPLOYEE_CLASS, 'A',
+                    BUSINESS_NAME)
     print
     print
 
