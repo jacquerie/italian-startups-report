@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
+import itertools
 import math
 import pandas as pd
 
@@ -182,40 +183,16 @@ def main():
         (sheet[REVENUE_CLASS] < sheet[EMPLOYEE_CLASS]), BUSINESS_NAME]
     print
 
-    # (XXX)jacquerie: Remove this duplication.
     print
     print 'Startups whose revenue class is much bigger than their employee class'
     print '---------------------------------------------------------------------'
-    print intersect(sheet,
-                    REVENUE_CLASS, 'E',
-                    EMPLOYEE_CLASS, 'A',
-                    BUSINESS_NAME)
-    print
-    print intersect(sheet,
-                    REVENUE_CLASS, 'E',
-                    EMPLOYEE_CLASS, 'B',
-                    BUSINESS_NAME)
-    print
-    print intersect(sheet,
-                   REVENUE_CLASS, 'E',
-                   EMPLOYEE_CLASS, 'C',
-                   BUSINESS_NAME)
-    print
-    print intersect(sheet,
-                    REVENUE_CLASS, 'D',
-                    EMPLOYEE_CLASS, 'A',
-                    BUSINESS_NAME)
-    print
-    print intersect(sheet,
-                    REVENUE_CLASS, 'D',
-                    EMPLOYEE_CLASS, 'B',
-                    BUSINESS_NAME)
-    print
-    print intersect(sheet,
-                    REVENUE_CLASS, 'C',
-                    EMPLOYEE_CLASS, 'A',
-                    BUSINESS_NAME)
-    print
+    for el in itertools.product(REVENUE_CLASSES, EMPLOYEE_CLASSES):
+        if (ord(el[0]) > ord(el[1]) + 1):
+            print intersect(sheet,
+                            REVENUE_CLASS, el[0],
+                            EMPLOYEE_CLASS, el[1],
+                            BUSINESS_NAME)
+            print
     print
 
     print
