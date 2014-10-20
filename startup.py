@@ -5,7 +5,7 @@ import itertools
 import math
 import pandas as pd
 
-DATE = '2014-10-13'
+DATE = '2014-10-20'
 XLS_NAME = 'startup.xls'
 SHEET_NAME = 'STARTUP_' + ''.join(reversed(DATE.split('-')))
 
