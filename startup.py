@@ -91,6 +91,15 @@ def estimate(sheet, column, values, limits):
     return [lower, upper]
 
 
+def combine_and_count(sheet, fst_col, fst_val, snd_col, snd_val):
+    return sheet[
+        (sheet[fst_col].isin(fst_val)) &
+        (sheet[snd_col].isin(snd_val))
+    ].T.apply(
+        lambda el: str(el[fst_col]) + str(el[snd_col])
+    ).value_counts()
+
+
 def intersect(sheet, fst_col, fst_val, snd_col, snd_val, res_col):
     return sheet.loc[
         (sheet[fst_col] == fst_val) &
@@ -166,12 +175,9 @@ def main():
     print
     print 'Classes combining revenue and employee classes and their counts'
     print '---------------------------------------------------------------'
-    print sheet[
-        (sheet[REVENUE_CLASS].isin(REVENUE_CLASSES)) &
-        (sheet[EMPLOYEE_CLASS].isin(EMPLOYEE_CLASSES))
-    ].T.apply(
-        lambda el: el[REVENUE_CLASS] + el[EMPLOYEE_CLASS]
-    ).value_counts()
+    print combine_and_count(sheet,
+                            REVENUE_CLASS, REVENUE_CLASSES,
+                            EMPLOYEE_CLASS, EMPLOYEE_CLASSES)
     print
 
     print
@@ -198,23 +204,17 @@ def main():
     print
     print 'Classes combining revenue class and capital class'
     print '-------------------------------------------------'
-    print sheet[
-        (sheet[REVENUE_CLASS].isin(REVENUE_CLASSES)) &
-        (sheet[CAPITAL_CLASS].isin(CAPITAL_CLASSES))
-    ].T.apply(
-        lambda el: el[REVENUE_CLASS] + str(el[CAPITAL_CLASS])
-    ).value_counts()
+    print combine_and_count(sheet,
+                            REVENUE_CLASS, REVENUE_CLASSES,
+                            CAPITAL_CLASS, CAPITAL_CLASSES)
     print
 
     print
     print 'Classes combining employee class and capital class'
     print '-------------------------------------------------'
-    print sheet[
-        (sheet[EMPLOYEE_CLASS].isin(EMPLOYEE_CLASSES)) &
-        (sheet[CAPITAL_CLASS].isin(CAPITAL_CLASSES))
-    ].T.apply(
-        lambda el: el[EMPLOYEE_CLASS] + str(el[CAPITAL_CLASS])
-    ).value_counts()
+    print combine_and_count(sheet,
+                            EMPLOYEE_CLASS, EMPLOYEE_CLASSES,
+                            CAPITAL_CLASS, CAPITAL_CLASSES)
     print
 
     # XXX(jacquerie): This needs a refactoring.
