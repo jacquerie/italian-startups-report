@@ -100,7 +100,7 @@ def combine_and_count(sheet, fst_col, fst_val, snd_col, snd_val):
     ).value_counts()
 
 
-def intersect(sheet, fst_col, fst_val, snd_col, snd_val, res_col):
+def intersect_and_project(sheet, fst_col, fst_val, snd_col, snd_val, res_col):
     return sheet.loc[
         (sheet[fst_col] == fst_val) &
         (sheet[snd_col] == snd_val), res_col]
@@ -194,10 +194,10 @@ def main():
     print '---------------------------------------------------------------------'
     for el in itertools.product(REVENUE_CLASSES, EMPLOYEE_CLASSES):
         if (ord(el[0]) > ord(el[1]) + 1):
-            print intersect(sheet,
-                            REVENUE_CLASS, el[0],
-                            EMPLOYEE_CLASS, el[1],
-                            BUSINESS_NAME)
+            print intersect_and_project(sheet,
+                                        REVENUE_CLASS, el[0],
+                                        EMPLOYEE_CLASS, el[1],
+                                        BUSINESS_NAME)
             print
     print
 
