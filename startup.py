@@ -227,7 +227,7 @@ def main():
         if sheet.at[el, REVENUE_CLASS] in REVENUE_CLASSES and not pd.isnull(s[el]):
             n = month_diff(pd.to_datetime(DATE), s[el])
             if (n < 6):
-                continue
+                continue  # Discard startups active for less than 6 months.
             b = max(REVENUE_LIMITS[sheet.at[el, REVENUE_CLASS]]['lower'], 10000)
             d[el] = (math.log(b) - math.log(10000)) / n
     result = sorted(d.iteritems(), key=lambda x: -x[1])
