@@ -76,7 +76,7 @@ POPULATION = {
 }
 
 
-def estimate(sheet, column, values, limits):
+def estimate_total(sheet, column, values, limits):
     lower = 0
     upper = 0
     s = sheet[
@@ -142,7 +142,10 @@ def main():
     print
     print 'Lower and upper estimates of all revenue produced by startups'
     print '-------------------------------------------------------------'
-    lower, upper = estimate(sheet, REVENUE_CLASS, REVENUE_CLASSES, REVENUE_LIMITS)
+    lower, upper = estimate_total(sheet,
+                                  REVENUE_CLASS,
+                                  REVENUE_CLASSES,
+                                  REVENUE_LIMITS)
     print "Minimum total revenue: €%d" % lower
     print "Maximum total revenue: €%d" % upper
     print "N: %d" % sheet[
@@ -153,7 +156,10 @@ def main():
     print
     print 'Lower and upper estimates of the total number of employees in startups'
     print '----------------------------------------------------------------------'
-    lower, upper = estimate(sheet, EMPLOYEE_CLASS, EMPLOYEE_CLASSES, EMPLOYEE_LIMITS)
+    lower, upper = estimate_total(sheet,
+                                  EMPLOYEE_CLASS,
+                                  EMPLOYEE_CLASSES,
+                                  EMPLOYEE_LIMITS)
     print "Minimum total employees: %d" % lower
     print "Maximum total employees: %d" % upper
     print "N: %d" % sheet[
@@ -164,7 +170,10 @@ def main():
     print
     print 'Lower and upper estimates of the total capital of startups'
     print '----------------------------------------------------------'
-    lower, upper = estimate(sheet, CAPITAL_CLASS, CAPITAL_CLASSES, CAPITAL_LIMITS)
+    lower, upper = estimate_total(sheet,
+                                  CAPITAL_CLASS,
+                                  CAPITAL_CLASSES,
+                                  CAPITAL_LIMITS)
     print "Minimum total capital: €%d" % lower
     print "Maximum total capital: €%d" % upper
     print "N: %d" % sheet[
