@@ -3,6 +3,11 @@ FILES = startup.xls startup.zip
 
 all: report
 
+archive: archive.py
+
+archive.py: startup.xls
+	@python $@
+
 clean:
 	rm -f $(FILES)
 
@@ -18,5 +23,5 @@ startup.xls: startup.zip
 startup.zip:
 	curl -o $@ $(URL)
 
-.PHONY: all clean report report.py
+.PHONY: all archive archive.py clean report report.py
 
