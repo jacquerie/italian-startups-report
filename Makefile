@@ -1,12 +1,14 @@
 URL = 'http://startup.registroimprese.it/report/startup.zip'
 FILES = startup.xls startup.zip
 
-all: startup.py
+all: report
 
 clean:
 	rm -f $(FILES)
 
-startup.py: startup.xls
+report: report.py
+
+report.py: startup.xls
 	@python $@
 
 startup.xls: startup.zip
@@ -16,5 +18,5 @@ startup.xls: startup.zip
 startup.zip:
 	curl -o $@ $(URL)
 
-.PHONY: all clean startup.py
+.PHONY: all clean report report.py
 
