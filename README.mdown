@@ -10,7 +10,12 @@ on [http://startup.registroimprese.it/](http://startup.registroimprese.it/).
 
 ## Usage ##
 
-Just run `make` in the project folder.
+Just run `make` or `make report` in the project folder. Data is updated weekly; to
+acquire new data delete the old data with `make clean` and then run `make report`
+again.
+
+If you want to stash the old data you can run `make archive`, which will create a
+new `.xls` file tagged with its date.
 
 ## Author ##
 
