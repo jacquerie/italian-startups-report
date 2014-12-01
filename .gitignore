@@ -3,4 +3,5 @@ report.pyc
 startup.xls
 startup.zip
 
+*.csv
 *.xls
