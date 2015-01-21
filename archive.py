@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
-from constants import *
+from constants import DATE
 import shutil
 
 

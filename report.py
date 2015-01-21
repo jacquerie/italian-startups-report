@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
-from constants import *
+from constants import DATE, XLS_NAME, SHEET_NAME, \
+    BUSINESS_NAME, BUSINESS_PROV, BUSINESS_TYPE, \
+    REVENUE_CLASS, EMPLOYEE_CLASS, CAPITAL_CLASS, BEGIN_DATE, \
+    REVENUE_CLASSES, REVENUE_LIMITS, EMPLOYEE_CLASSES, EMPLOYEE_LIMITS, \
+    CAPITAL_CLASSES, CAPITAL_LIMITS, POPULATION
 import itertools
 import math
 import pandas as pd
