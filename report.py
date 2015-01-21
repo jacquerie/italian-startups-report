@@ -175,8 +175,7 @@ def main():
             if (n > 48):
                 d[sheet.at[el, BUSINESS_NAME]] = n
     result = sorted(d.iteritems(), key=lambda x: x[1])
-    for el in result:
-        print "%d\t%s" % (el[1], el[0])
+    print "N: %d" % len(result)
     print
 
 
