@@ -145,22 +145,6 @@ def main():
             print
     print
 
-    print
-    print 'Classes combining revenue class and capital class'
-    print '-------------------------------------------------'
-    print combine_and_count(sheet,
-                            REVENUE_CLASS, REVENUE_CLASSES,
-                            CAPITAL_CLASS, CAPITAL_CLASSES)
-    print
-
-    print
-    print 'Classes combining employee class and capital class'
-    print '-------------------------------------------------'
-    print combine_and_count(sheet,
-                            EMPLOYEE_CLASS, EMPLOYEE_CLASSES,
-                            CAPITAL_CLASS, CAPITAL_CLASSES)
-    print
-
     # XXX(jacquerie): This needs a refactoring.
     print
     print 'First ten startups by month-by-month growth estimate'
