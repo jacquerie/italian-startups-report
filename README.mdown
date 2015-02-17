@@ -5,8 +5,8 @@ on [http://startup.registroimprese.it/](http://startup.registroimprese.it/).
 
 ## Install ##
 
-1. Clone this repository: `git clone https://github.com/jacquerie/italian-startup-report.git`
-2. Install the dependencies: `cd italian-startup-report && pip install -r requirements.txt`
+1. Clone this repository: `git clone https://github.com/jacquerie/italian-startups-report.git`
+2. Install the dependencies: `cd italian-startups-report && pip install -r requirements.txt`
 
 ## Usage ##
 
