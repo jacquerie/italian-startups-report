@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
-DATE = '2015-02-09'
+DATE = '2015-02-16'
 XLS_NAME = 'startup.xls'
 SHEET_NAME = 'STARTUP_' + ''.join(reversed(DATE.split('-')))
 
@@ -10,7 +10,7 @@ BUSINESS_PROV = 'pv'
 BUSINESS_TYPE = 'nat.giuridica'
 REVENUE_CLASS = 'classe di produzione ultimo anno (1)'
 EMPLOYEE_CLASS = 'classe di addetti ultimo anno (2)'
-CAPITAL_CLASS = 'classe di capitale (4)'
+CAPITAL_CLASS = 'classe di capitale (5)'
 BEGIN_DATE = u'data inizio dell\'esercizio effettivo dell\'attività'
 
 REVENUE_CLASSES = ['A', 'B', 'C', 'D', 'E']
