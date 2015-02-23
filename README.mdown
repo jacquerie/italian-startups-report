@@ -11,8 +11,9 @@ on [http://startup.registroimprese.it/](http://startup.registroimprese.it/).
 ## Usage ##
 
 Just run `make` or `make report` in the project folder. Data is updated every
-monday; to acquire new data delete the old data with `make clean` and then run
-`make report` again.
+monday; to acquire new data first pull this repository for changes with `git
+pull`, then delete the old data with `make clean` and finally run `make
+report`.
 
 If you want to stash the old data you can run `make archive`, which will create
 a new `.xls` file tagged with its date. Then run `make clean` and `make report`
