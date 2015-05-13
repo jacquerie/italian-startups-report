@@ -143,7 +143,6 @@ def main():
                                         EMPLOYEE_CLASS, el[1],
                                         BUSINESS_NAME)
             print
-    print
 
     # XXX(jacquerie): This needs a refactoring.
     print
