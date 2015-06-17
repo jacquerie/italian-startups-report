@@ -57,8 +57,8 @@ def main():
 
     # XXX(jacquerie): This needs a refactoring.
     print
-    print 'First ten provinces ordered by numer of startups, weighted by population'
-    print '------------------------------------------------------------------------'
+    print 'First ten provinces ordered by number of startups, weighted by population'
+    print '-------------------------------------------------------------------------'
     d = {}
     s = sheet.groupby([BUSINESS_PROV]).size()
     for el in s.index:
