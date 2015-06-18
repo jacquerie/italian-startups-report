@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from constants import DATE, XLS_NAME, SHEET_NAME, \
     BUSINESS_NAME, BUSINESS_PROV, BUSINESS_TYPE, \

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 DATE = '2015-06-15'
 XLS_NAME = 'startup.xls'
