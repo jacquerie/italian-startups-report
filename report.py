@@ -26,6 +26,12 @@ def estimate_total(sheet, column, values, limits):
     return [lower, upper]
 
 
+def count(sheet, column, values):
+    return sheet[
+        sheet[column].isin(values)
+    ][column].count()
+
+
 def combine_and_count(sheet, fst_col, fst_val, snd_col, snd_val):
     return sheet[
         (sheet[fst_col].isin(fst_val)) &
@@ -81,11 +87,9 @@ def main():
                                   REVENUE_CLASS,
                                   REVENUE_CLASSES,
                                   REVENUE_LIMITS)
-    print "Minimum total revenue: €%d" % lower
-    print "Maximum total revenue: €%d" % upper
-    print "N: %d" % sheet[
-        sheet[REVENUE_CLASS].isin(REVENUE_CLASSES)
-    ][REVENUE_CLASS].count()
+    print 'Minimum total revenue: €%d' % lower
+    print 'Maximum total revenue: €%d' % upper
+    print 'N: %d' % count(sheet, REVENUE_CLASS, REVENUE_CLASSES)
     print
 
     print
@@ -95,11 +99,9 @@ def main():
                                   EMPLOYEE_CLASS,
                                   EMPLOYEE_CLASSES,
                                   EMPLOYEE_LIMITS)
-    print "Minimum total employees: %d" % lower
-    print "Maximum total employees: %d" % upper
-    print "N: %d" % sheet[
-        sheet[EMPLOYEE_CLASS].isin(EMPLOYEE_CLASSES)
-    ][EMPLOYEE_CLASS].count()
+    print 'Minimum total employees: %d' % lower
+    print 'Maximum total employees: %d' % upper
+    print 'N: %d' % count(sheet, EMPLOYEE_CLASS, EMPLOYEE_CLASSES)
     print
 
     print
@@ -109,11 +111,9 @@ def main():
                                   CAPITAL_CLASS,
                                   CAPITAL_CLASSES,
                                   CAPITAL_LIMITS)
-    print "Minimum total capital: €%d" % lower
-    print "Maximum total capital: €%d" % upper
-    print "N: %d" % sheet[
-        sheet[CAPITAL_CLASS].isin(CAPITAL_CLASSES)
-    ][CAPITAL_CLASS].count()
+    print 'Minimum total capital: €%d' % lower
+    print 'Maximum total capital: €%d' % upper
+    print 'N: %d' % count(sheet, CAPITAL_CLASS, CAPITAL_CLASSES)
     print
 
     print
@@ -174,7 +174,7 @@ def main():
             if (n > 48):
                 d[sheet.at[el, BUSINESS_NAME]] = n
     result = sorted(d.iteritems(), key=lambda x: x[1])
-    print "N: %d" % len(result)
+    print 'N: %d' % len(result)
     print
 
 
