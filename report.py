@@ -173,8 +173,7 @@ def main():
             n = month_diff(pd.to_datetime(DATE), s[el])
             if (n > 48):
                 d[sheet.at[el, BUSINESS_NAME]] = n
-    result = sorted(d.iteritems(), key=lambda x: x[1])
-    print 'N: %d' % len(result)
+    print 'N: %d' % len(d)
     print
 
 
