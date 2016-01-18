@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-DATE = '2016-01-11'
+DATE = '2016-01-18'
 XLS_NAME = 'startup.xls'
 SHEET_NAME = 'STARTUP_' + ''.join(reversed(DATE.split('-')))
 
